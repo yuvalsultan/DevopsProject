@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,7 @@
 <style>
 table, td {
     border: 1px solid black;
-    padding: 700px;
+    padding: 10px;
     text-align: center;
     font-size: 60px;
 }
@@ -31,14 +30,16 @@ for (int i = 0; i < 3; i++) {
 }
 
 String turn = "X";
-if (request.getParameter("cell") != null) {
+if (request.getParameter("row") != null && request.getParameter("col") != null) {
     int row = Integer.parseInt(request.getParameter("row"));
     int col = Integer.parseInt(request.getParameter("col"));
-    board[row][col] = turn;
-    if (turn.equals("X")) {
-        turn = "O";
-    } else {
-        turn = "X";
+    if (board[row][col].isEmpty()) {
+        board[row][col] = turn;
+        if (turn.equals("X")) {
+            turn = "O";
+        } else {
+            turn = "X";
+        }
     }
 }
 %>
@@ -52,7 +53,7 @@ for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
     %>
         <td>
-            <a href="?cell=true&row=<%=i%>&col=<%=j%>">
+            <a href="?row=<%=i%>&col=<%=j%>">
                 <%=board[i][j]%>
             </a>
         </td>
@@ -90,4 +91,3 @@ if (board[0][2].equals(board[1][1]) && board[0][2].equals(board[2][0])
     winner = board[0][2];
 }
 %>
-
