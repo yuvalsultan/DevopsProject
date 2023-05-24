@@ -2,92 +2,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Tic Tac Toe</title>
-<style>
-table, td {
-    border: 1px solid black;
-    padding: 10px;
-    text-align: center;
-    font-size: 60px;
-}
-.center {
-    margin: auto;
-    width: 75%;
-    padding: 20px;
-}
-</style>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <style>
+        .board {
+            display: flex;
+            flex-wrap: wrap;
+            width: 300px;
+            height: 300px;
+        }
+
+        .cell {
+            border: 1px solid #000;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <h1>Tic Tac Toe</h1>
 
-<h2>Tic Tac Toe</h2>
+    <div class="board">
+        <%-- Cells --%>
+        <% for (int i = 0; i < 9; i++) { %>
+            <div class="cell" onclick="makeMove(<%= i %>)"></div>
+        <% } %>
+    </div>
 
-<%
-String[][] board = new String[3][3];
-for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-        board[i][j] = "";
-    }
-}
+    <script>
+        var currentPlayer = "X";
+        var cells = document.getElementsByClassName("cell");
 
-String turn = "X";
-if (request.getParameter("row") != null && request.getParameter("col") != null) {
-    int row = Integer.parseInt(request.getParameter("row"));
-    int col = Integer.parseInt(request.getParameter("col"));
-    if (board[row][col].isEmpty()) {
-        board[row][col] = turn;
-        if (turn.equals("X")) {
-            turn = "O";
-        } else {
-            turn = "X";
+        function makeMove(cellIndex) {
+            var cell = cells[cellIndex];
+            if (cell.innerHTML === "") {
+                cell.innerHTML = currentPlayer;
+                cell.style.pointerEvents = "none"; // Disable further clicks on the cell
+                checkWinner();
+                currentPlayer = (currentPlayer === "X") ? "O" : "X";
+            }
         }
-    }
-}
-%>
 
-<table>
-<%
-for (int i = 0; i < 3; i++) {
-%>
-    <tr>
-    <%
-    for (int j = 0; j < 3; j++) {
-    %>
-        <td>
-            <a href="?row=<%=i%>&col=<%=j%>">
-                <%=board[i][j]%>
-            </a>
-        </td>
-    <%
-    }
-    %>
-    </tr>
-<%
-}
-%>
-</table>
+        function checkWinner() {
+            var winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                [0, 4, 8], [2, 4, 6] // Diagonals
+            ];
 
-<%
-String winner = "";
-for (int i = 0; i < 3; i++) {
-    if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2])
-            && !board[i][0].equals("")) {
-        winner = board[i][0];
-        break;
-    }
-}
-for (int i = 0; i < 3; i++) {
-    if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i])
-            && !board[0][i].equals("")) {
-        winner = board[0][i];
-        break;
-    }
-}
-if (board[0][0].equals(board[1][1]) && board[0][0].equals(board[2][2])
-        && !board[0][0].equals("")) {
-    winner = board[0][0];
-}
-if (board[0][2].equals(board[1][1]) && board[0][2].equals(board[2][0])
-        && !board[0][2].equals("")) {
-    winner = board[0][2];
-}
-%>
+            for (var i = 0; i < winningCombinations.length; i++) {
+                var combination = winningCombinations[i];
+                var a = cells[combination[0]].innerHTML;
+                var b = cells[combination[1]].innerHTML;
+                var c = cells[combination[2]].innerHTML;
+
+                if (a !== "" && a === b && a === c) {
+                    alert("Player " + a + " wins!");
+                    resetBoard();
+                    return;
+                }
+            }
+
+            if (isBoardFull()) {
+                alert("It's a tie!");
+                resetBoard();
+            }
+        }
+
+        function resetBoard() {
+            for (var i = 0; i < cells.length; i++) {
+                cells[i].innerHTML = "";
+                cells[i].style.pointerEvents = "auto";
+            }
+        }
+
+        function isBoardFull() {
+            for (var i = 0; i < cells.length; i++) {
+                if (cells[i].innerHTML === "") {
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
