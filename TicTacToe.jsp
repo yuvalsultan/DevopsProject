@@ -8,8 +8,8 @@
         .board {
             display: flex;
             flex-wrap: wrap;
-            width: 1000px;
-            height: 1000px;
+            width: 304px;
+            height: 304px;
         }
 
         .cell {
