@@ -27,15 +27,17 @@
 <body>
     <h1>Tic Tac Toe</h1>
 
+    <label for="option1">
+        <input type="radio" name="option" id="option1" value="option1"> Option 1
+    </label>
+
     <div class="board">
         <%-- Cells --%>
         <% for (int i = 0; i < 9; i++) { %>
             <div class="cell" onclick="makeMove(<%= i %>)"></div>
         <% } %>
     </div>
-    <label for="option1">
-        <input type="radio" name="option" id="option1" value="option1"> Option 1
-    </label>
+
 
     <script>
         var currentPlayer = "X";
