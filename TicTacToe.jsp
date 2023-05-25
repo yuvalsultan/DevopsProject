@@ -33,6 +33,9 @@
             <div class="cell" onclick="makeMove(<%= i %>)"></div>
         <% } %>
     </div>
+    <label for="option1">
+        <input type="radio" name="option" id="option1" value="option1"> Option 1
+    </label>
 
     <script>
         var currentPlayer = "X";
@@ -89,6 +92,7 @@
             }
             return true;
         }
+        
     </script>
 </body>
 </html>
