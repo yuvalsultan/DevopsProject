@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Tic Tac Toe</title>
-    <a href="https://www.google.com">Click here to visit Example.com</a>
     <style>
         .board {
             display: flex;
@@ -27,6 +26,9 @@
 </head>
 <body>
     <h1>Tic Tac Toe</h1>
+
+    <a href="https://www.google.com">Click here to visit Google</a>
+
 
     <div class="board">
         <%-- Cells --%>
