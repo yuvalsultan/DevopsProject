@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tic Tac Toe</title>
+    <h1>hello</h1>
     <style>
         .board {
             display: flex;
