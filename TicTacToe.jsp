@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tic Tac Toe</title>
-    <h1>hello</h1>
+    <a href="https://www.google.com">Click here to visit Example.com</a>
     <style>
         .board {
             display: flex;
