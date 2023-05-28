@@ -13,7 +13,7 @@
         }
 
         .cell {
-            border: 1px solid #000;
+            border: 1px solid #000; 
             width: 100px;
             height: 100px;
             display: flex;
@@ -26,6 +26,7 @@
 </head>
 <body>
     <h1>Tic Tac Toe</h1>
+    <h1>adi yuval daniel</h1>
 
     <a href="https://www.google.com">Click here to visit Google</a>
 
